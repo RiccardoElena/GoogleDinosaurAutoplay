@@ -1,22 +1,21 @@
-const origin = Runner.prototype.gameOver
-
+// deleting gameover func
 Runner.prototype.gameOver = () => {}
 
-const autoPlayLoop = () => {
-  const JUMP_SPEED = 50
-  const DISTANCE_BEFORE_JUMP = 120
+const AutoPlay = () => {
+  const jumpSpeed = 50
+  const jumpDistance = 120
   const instance = window.Runner.instance_
   const tRex = instance.tRex
   if (tRex.jumping) {
-    requestAnimationFrame(autoPlayLoop)
+    requestAnimationFrame(AutoPlay)
     return
   }
-  const tRexPos = tRex.xPos
+  const tRexX = tRex.xPos
   const obstacles = instance.horizon.obstacles
-  const nextObstacle = obstacles.find(o => o.xPos > tRexPos)
-  if (nextObstacle && (nextObstacle.xPos - tRexPos) <= DISTANCE_BEFORE_JUMP) {
-    tRex.startJump(JUMP_SPEED)
+  const nextObstacle = obstacles.find(o => o.xPos > tRexX)
+  if (nextObstacle && (nextObstacle.xPos - tRexX) <= jumpDistance) {
+    tRex.startJump(jumpSpeed)
   }
-  requestAnimationFrame(autoPlayLoop);
+  requestAnimationFrame(AutoPlay);
 }
-requestAnimationFrame(autoPlayLoop)
+requestAnimationFrame(AutoPlay)
